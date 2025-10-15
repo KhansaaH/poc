@@ -1,0 +1,106 @@
+{
+  "components": {
+    "Button": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "backgroundColor": { "type": "string" },
+          "borderColor": { "type": "string" },
+          "textColor": { "type": "string" },
+          "minHeight": { "type": "number" },
+          "minWidth": { "type": "number" },
+          "paddingHorizontal": { "type": "number" },
+          "paddingVertical": { "type": "number" },
+          "borderRadius": { "type": "number" }
+        },
+        "appearances": {
+          "primary": { "default": true },
+          "secondary": { "default": false },
+          "system-approve": { "default": false },
+          "system-reject": { "default": false }
+        },
+        "variantGroups": {},
+        "states": {
+          "hover": { "default": false, "priority": 0, "scope": "all" },
+          "active": { "default": false, "priority": 1, "scope": "all" },
+          "selected": { "default": false, "priority": 1, "scope": "all" },
+          "disabled": { "default": false, "priority": 2, "scope": "all" }
+        }
+      },
+      "appearances": {
+        "primary": {
+          "mapping": {
+            "backgroundColor": "#205CDF",
+            "borderColor": "#205CDF",
+            "textColor": "#FFFFFF",
+            "minHeight": 40,
+            "minWidth": 100,
+            "paddingHorizontal": 20,
+            "paddingVertical": 10,
+            "borderRadius": 8,
+            "state": {
+              "hover": { "backgroundColor": "#1846AA", "borderColor": "#1846AA", "textColor": "#FFFFFF" },
+              "active": { "backgroundColor": "#113278", "borderColor": "#113278", "textColor": "#FFFFFF" },
+              "selected": { "backgroundColor": "#113278", "borderColor": "#113278", "textColor": "#FFFFFF" },
+              "disabled": { "backgroundColor": "#A6BEF2", "borderColor": "#A6BEF2", "textColor": "#FFFFFF" }
+            }
+          }
+        },
+        "secondary": {
+          "mapping": {
+            "backgroundColor": "--buttons-secondary-default",
+            "borderColor": "--buttons-secondary-default",
+            "textColor": "--buttons-on-secondary-default",
+            "minHeight": 40,
+            "minWidth": 100,
+            "paddingHorizontal": 20,
+            "paddingVertical": 10,
+            "borderRadius": 8,
+            "state": {
+              "hover": { "backgroundColor": "--buttons-secondary-hover", "textColor": "--buttons-on-secondary-hover" },
+              "active": { "backgroundColor": "--buttons-secondary-selected", "textColor": "--buttons-on-secondary-selected" },
+              "selected": { "backgroundColor": "--buttons-secondary-selected", "textColor": "--buttons-on-secondary-selected" },
+              "disabled": { "backgroundColor": "--buttons-secondary-disabled", "textColor": "--buttons-on-secondary-disabled" }
+            }
+          }
+        },
+        "system-approve": {
+          "mapping": {
+            "backgroundColor": "--buttons-system-approve-default",
+            "borderColor": "--buttons-system-approve-default",
+            "textColor": "--buttons-on-system-approve-default",
+            "minHeight": 40,
+            "minWidth": 100,
+            "paddingHorizontal": 10,
+            "paddingVertical": 10,
+            "borderRadius": 8,
+            "state": {
+              "hover": { "backgroundColor": "--buttons-system-approve-hover", "textColor": "--buttons-on-system-approve-hover" },
+              "active": { "backgroundColor": "--buttons-system-approve-selected", "textColor": "--buttons-on-system-approve-selected" },
+              "selected": { "backgroundColor": "--buttons-system-approve-selected", "textColor": "--buttons-on-system-approve-selected" },
+              "disabled": { "backgroundColor": "--buttons-system-approve-disabled", "textColor": "--buttons-on-system-approve-disabled" }
+            }
+          }
+        },
+        "system-reject": {
+          "mapping": {
+            "backgroundColor": "--buttons-system-reject-default",
+            "borderColor": "--buttons-system-reject-default",
+            "textColor": "--buttons-on-system-reject-default",
+            "minHeight": 40,
+            "minWidth": 100,
+            "paddingHorizontal": 10,
+            "paddingVertical": 10,
+            "borderRadius": 8,
+            "state": {
+              "hover": { "backgroundColor": "--buttons-system-reject-hover", "textColor": "--buttons-on-system-reject-hover" },
+              "active": { "backgroundColor": "--buttons-system-reject-selected", "textColor": "--buttons-on-system-reject-selected" },
+              "selected": { "backgroundColor": "--buttons-system-reject-selected", "textColor": "--buttons-on-system-reject-selected" },
+              "disabled": { "backgroundColor": "--buttons-system-reject-disabled", "textColor": "--buttons-on-system-reject-disabled" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
