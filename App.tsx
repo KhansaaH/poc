@@ -1,152 +1,76 @@
 import React from 'react';
-import { ApplicationProvider, IconRegistry, Layout } from '@ui-kitten/components';
+import {
+  ApplicationProvider,
+  IconRegistry,
+  Layout,
+  Text,
+  Card,
+  InputProps,
+  Input,
+  Select,
+  SelectItem,
+} from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { BaseButton } from './src/components/base-button';
-import { Text, StyleSheet, ScrollView, View } from 'react-native';
-
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { BaseButton } from './src/components/base-button/base-button';
+import { MyCustomIconsPack, AppIcon } from './src/icons/base-icon';
+import { BaseSelect } from './src/components/base-select/base-select';
+import BaseInput from './src/components/base-input/base-input';
+const useInputState = (initialValue = ''): InputProps => {
+  const [value, setValue] = React.useState(initialValue);
+  return { value, onChangeText: setValue };
+};
 export default function App() {
-  
   return (
     <>
-      <IconRegistry icons={EvaIconsPack} />
+      <IconRegistry icons={[EvaIconsPack, MyCustomIconsPack]} />
       <ApplicationProvider {...eva} theme={eva.light}>
-        <ScrollView contentContainerStyle={styles.container}>
-          {/* Primary Group */}
-          <View style={styles.group}>
-            <Text style={styles.title}>Primary Buttons</Text>
-            <View style={styles.row}>
-              <BaseButton
-                variant="primary"
-                onPress={() => console.log('Primary clicked')}
-              >
-                Primary
-              </BaseButton>
+        <ScrollView contentContainerStyle={{ gap: 24, padding: 16 }}>
+          <BaseInput placeholder="Default input" size="medium" />
 
-              <BaseButton
-                variant="primary"
-                onPress={() => console.log('Primary disabled')}
-                disabled
-              >
-                Disabled
-              </BaseButton>
+          <BaseInput
+          label='Label'
+            placeholder="Hover / Focused"
+            size="large"
+            status="hover"
+          />
 
-              <BaseButton
-                variant="primary"
-                onPress={() => console.log('Primary selected')}
-                selected
-              >
-                Selected
-              </BaseButton>
-            </View>
-          </View>
+          <BaseInput
+            placeholder="Error input"
+            size="large"
+            status="error"
+          label='Label'
+          />
 
-          {/* Secondary Group */}
-          <View style={styles.group}>
-            <Text style={styles.title}>Secondary Buttons</Text>
-            <View style={styles.row}>
-              <BaseButton
-                variant="secondary"
-                onPress={() => console.log('Secondary clicked')}
-                                size='large'
+          <BaseInput
+            placeholder="selected input"
+            size="large"
+            status="selected"
+                      label='Label'
 
-              >
-                Secondary
-              </BaseButton>
-              <BaseButton variant="secondary" disabled>
-                Disabled
-              </BaseButton>
-              <BaseButton
-                variant="secondary"
-                onPress={() => console.log('Primary selected')}
-                selected
-              >
-                Selected
-              </BaseButton>
-            </View>
-          </View>
+          />
+          <BaseInput
+            placeholder="filled-in input"
+            size="large"
+            status="filled-in"
+                      label='Label'
 
-          {/* System Group */}
-          <View style={styles.group}>
-            <Text style={styles.title}>System Buttons</Text>
-            <View style={styles.row}>
-              <BaseButton
-                variant="system-approve"
-                onPress={() => console.log('Approved')}
-                // icon={<Text style={{ color: '#fff', fontSize: 18 }}>✓</Text>}
-              >
-                Approve
-              </BaseButton>
-               <BaseButton
-                variant="system-approve"
-                onPress={() => console.log('Approved')}
-                selected
-              >
-                Selected
-              </BaseButton>
-              <BaseButton
-  variant="system-reject"
-  // icon={<Icon name="trash-2-outline" fill="#fff" width={20} height={20} />}
-  iconPlacement="after"
->
-  Reject
-</BaseButton>
-               <BaseButton
-                variant="system-reject"
-                onPress={() => console.log('Rejected')}
-                selected
-              >
-                Selected
-              </BaseButton>
-              <BaseButton variant="system-reject" disabled>
-                Disabled
-              </BaseButton>
-            </View>
-          </View>
-
-          {/* Tertiary & Default */}
-          <View style={styles.group}>
-            <Text style={styles.title}>Tertiary & Default</Text>
-            <View style={styles.row}>
-              <BaseButton
-                variant="tertiary"
-                onPress={() => console.log('More')}
-              >
-                More
-              </BaseButton>
-              <BaseButton
-                variant="default"
-                onPress={() => console.log('Default')}
-              >
-                Default
-              </BaseButton>
-            </View>
-          </View>
+          />
+          <BaseInput
+            placeholder="disabled input"
+            size="large"
+            status="disabled"
+          label='Label'
+          />
+          <BaseInput
+            placeholder="success input"
+            size="large"
+            status="success"
+          label='Label'
+          />
         </ScrollView>
       </ApplicationProvider>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    paddingVertical: 24,
-    paddingHorizontal: 20,
-    backgroundColor: '#F9FAFB',
-  },
-  group: {
-    marginBottom: 32,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#171717',
-    marginBottom: 12,
-  },
-  row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-});

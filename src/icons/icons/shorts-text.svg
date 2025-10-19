@@ -1,0 +1,25 @@
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_31505_24279)">
+<path d="M4.69434 6.16016V4.90615H11.3162V6.16016" stroke="currentColor" stroke-width="0.937502" stroke-miterlimit="10"/>
+<path d="M8.00403 4.90613V11.4856" stroke="currentColor" stroke-width="0.937502" stroke-miterlimit="10"/>
+<path d="M6.7229 11.1829H9.28515" stroke="currentColor" stroke-width="0.937502" stroke-miterlimit="10"/>
+<mask id="mask0_31505_24279" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="17" height="16">
+<path d="M0.0195312 -6.10352e-05H16.0195V16H0.0195312V-6.10352e-05Z" fill="currentColor"/>
+</mask>
+<g mask="url(#mask0_31505_24279)">
+<path d="M1.60925 2.70309V13.1562" stroke="currentColor" stroke-width="0.937502" stroke-miterlimit="10"/>
+<path d="M14.4297 2.70309V13.1562" stroke="currentColor" stroke-width="0.937502" stroke-miterlimit="10"/>
+<path d="M2.71887 1.58594H13.3126" stroke="currentColor" stroke-width="0.937502" stroke-miterlimit="10"/>
+<path d="M2.71887 14.4141H13.3126" stroke="currentColor" stroke-width="0.937502" stroke-miterlimit="10"/>
+<path d="M3.15884 1.80191C3.15884 2.53828 2.56187 3.13525 1.82553 3.13525C1.08916 3.13525 0.492188 2.53828 0.492188 1.80191C0.492188 1.06553 1.08916 0.468557 1.82553 0.468557C2.56187 0.468557 3.15884 1.06553 3.15884 1.80191Z" stroke="currentColor" stroke-width="0.937502" stroke-miterlimit="10"/>
+<path d="M3.15884 14.1979C3.15884 14.9343 2.56187 15.5312 1.82553 15.5312C1.08916 15.5312 0.492188 14.9343 0.492188 14.1979C0.492188 13.4615 1.08916 12.8646 1.82553 12.8646C2.56187 12.8646 3.15884 13.4615 3.15884 14.1979Z" stroke="currentColor" stroke-width="0.937502" stroke-miterlimit="10"/>
+<path d="M15.5522 1.80191C15.5522 2.53828 14.9552 3.13525 14.2188 3.13525C13.4825 3.13525 12.8855 2.53828 12.8855 1.80191C12.8855 1.06553 13.4825 0.468557 14.2188 0.468557C14.9552 0.468557 15.5522 1.06553 15.5522 1.80191Z" stroke="currentColor" stroke-width="0.937502" stroke-miterlimit="10"/>
+<path d="M15.5522 14.1979C15.5522 14.9343 14.9552 15.5312 14.2188 15.5312C13.4825 15.5312 12.8855 14.9343 12.8855 14.1979C12.8855 13.4615 13.4825 12.8646 14.2188 12.8646C14.9552 12.8646 15.5522 13.4615 15.5522 14.1979Z" stroke="currentColor" stroke-width="0.937502" stroke-miterlimit="10"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_31505_24279">
+<rect width="16" height="16.0001" fill="currentColor"/>
+</clipPath>
+</defs>
+</svg>

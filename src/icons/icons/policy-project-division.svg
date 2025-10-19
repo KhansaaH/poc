@@ -1,0 +1,10 @@
+<svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.12974 4.021H18.1297C18.3664 4.021 18.5583 4.21288 18.5583 4.44957V6.28613C18.9443 6.28615 19.2743 6.2865 19.5583 6.29736V4.44957C19.5583 3.66059 18.9187 3.021 18.1297 3.021H2.12974C1.34077 3.021 0.701172 3.66059 0.701172 4.44957V15.0618C0.701172 15.8508 1.34077 16.4904 2.12975 16.4904H11.9678C11.8923 16.2318 11.8629 15.9079 11.8515 15.4904H2.12975C1.89305 15.4904 1.70117 15.2985 1.70117 15.0618V4.44957C1.70117 4.21287 1.89305 4.021 2.12974 4.021Z" fill="currentColor"/>
+<rect x="13.1296" y="7.57227" width="7.76471" height="9.42857" rx="1.42857" stroke="currentColor"/>
+<path d="M15.3481 10.3452H18.6759" stroke="currentColor" stroke-linecap="round"/>
+<path d="M15.3481 12.563H18.6759" stroke="currentColor" stroke-linecap="round"/>
+<path d="M15.3481 14.7822H17.5666" stroke="currentColor" stroke-linecap="round"/>
+<path d="M6.53796 3.47V2.65367C6.53796 1.86469 7.17756 1.2251 7.96654 1.2251H12.2931C13.082 1.2251 13.7216 1.86469 13.7216 2.65367V3.47" stroke="currentColor"/>
+<rect x="8.78271" y="7.51074" width="2.69388" height="3.59184" rx="0.714286" stroke="currentColor"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.50322 9.7C1.56434 9.7 0.803223 8.93888 0.803223 8H1.80322C1.80322 8.3866 2.11662 8.7 2.50322 8.7H8.58789V9.7H2.50322Z" fill="currentColor"/>
+</svg>
