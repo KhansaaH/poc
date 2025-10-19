@@ -8,8 +8,7 @@ import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ScrollView } from 'react-native';
 import BaseInput from '../components/base-input/base-input';
-import { MyCustomIconsPack } from '../icons/base-icon';
-
+import { AppIcon, MyCustomIconsPack } from '../icons/base-icon';
 
 const useInputState = (initialValue = ''): InputProps => {
   const [value, setValue] = React.useState(initialValue);
@@ -26,6 +25,7 @@ export default function App() {
             placeholder="Default input"
             size="medium"
             status="default"
+            accessoryLeft={<AppIcon name="Search" />}
           />
 
           <BaseInput
@@ -40,6 +40,7 @@ export default function App() {
             size="large"
             status="error"
             label="Label"
+            accessoryLeft={<AppIcon name="Search" />}
           />
 
           <BaseInput
