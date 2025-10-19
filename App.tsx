@@ -2,78 +2,95 @@ import React from 'react';
 import {
   ApplicationProvider,
   IconRegistry,
-  Layout,
   Text,
-  Card,
-  InputProps,
-  Input,
-  Select,
-  SelectItem,
 } from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { BaseButton } from './src/components/base-button/base-button';
-import { MyCustomIconsPack, AppIcon } from './src/icons/base-icon';
-import { BaseSelect } from './src/components/base-select/base-select';
-import BaseInput from './src/components/base-input/base-input';
-const useInputState = (initialValue = ''): InputProps => {
-  const [value, setValue] = React.useState(initialValue);
-  return { value, onChangeText: setValue };
-};
+import { MyCustomIconsPack } from './src/icons/base-icon';
+
+import ButtonPage from './src/screens/base-button-screen';
+import InputPage from './src/screens/base-input-screen';
+import SelectPage from './src/screens/base-select-screen';
+
+const Stack = createNativeStackNavigator();
+
 export default function App() {
   return (
     <>
       <IconRegistry icons={[EvaIconsPack, MyCustomIconsPack]} />
       <ApplicationProvider {...eva} theme={eva.light}>
-        <ScrollView contentContainerStyle={{ gap: 24, padding: 16 }}>
-          <BaseInput
-            label="Label"
-            placeholder="Default input"
-            size="medium"
-            status="default"
-          />
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ title: 'Main Menu' }}
+            />
 
-          <BaseInput
-            label="Label"
-            placeholder="Hover / Focused"
-            size="large"
-            status="hover"
-          />
-
-          <BaseInput
-            placeholder="Error input"
-            size="large"
-            status="error"
-            label="Label"
-          />
-
-          <BaseInput
-            placeholder="selected input"
-            size="large"
-            status="selected"
-            label="Label"
-          />
-          <BaseInput
-            placeholder="filled-in input"
-            size="large"
-            status="filled-in"
-            label="Label"
-          />
-          <BaseInput
-            placeholder="disabled input"
-            size="large"
-            status="disabled"
-            label="Label"
-          />
-          <BaseInput
-            placeholder="success input"
-            size="large"
-            status="success"
-            label="Label"
-          />
-        </ScrollView>
+            <Stack.Screen name="ButtonPage" component={ButtonPage} />
+            <Stack.Screen name="InputPage" component={InputPage} />
+            <Stack.Screen name="SelectPage" component={SelectPage} />
+          </Stack.Navigator>
+        </NavigationContainer>
       </ApplicationProvider>
     </>
   );
 }
+
+/* ===================== Home Screen ===================== */
+function HomeScreen({ navigation }: any) {
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>Component Showcase</Text>
+      <View style={styles.row}>
+        <BaseButton
+          variant="primary"
+          onPress={() => navigation.navigate('ButtonPage')}
+        >
+          Go to Button Page
+        </BaseButton>
+
+        <BaseButton
+          variant="secondary"
+          onPress={() => navigation.navigate('InputPage')}
+        >
+          Go to Input Page
+        </BaseButton>
+
+        <BaseButton
+          variant="system-approve"
+          onPress={() => navigation.navigate('SelectPage')}
+        >
+          Go to Select Page
+        </BaseButton>
+      </View>
+    </ScrollView>
+  );
+}
+
+/* ===================== Styles ===================== */
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    padding: 20,
+    gap: 16,
+    backgroundColor: '#F5F7FA',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: '700',
+    marginBottom: 16,
+    color: '#171717',
+  },
+  row: {
+    flexDirection: 'column',
+    gap: 16,
+    width: '100%',
+  },
+});

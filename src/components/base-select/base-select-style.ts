@@ -7,8 +7,6 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#111827',
     marginBottom: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: 'gray',
   },
 
   selectWrapperFocused: {

@@ -7,8 +7,9 @@ import {
 import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ScrollView } from 'react-native';
-import { MyCustomIconsPack } from '../../icons/base-icon';
-import BaseInput from './base-input';
+import BaseInput from '../components/base-input/base-input';
+import { MyCustomIconsPack } from '../icons/base-icon';
+
 
 const useInputState = (initialValue = ''): InputProps => {
   const [value, setValue] = React.useState(initialValue);

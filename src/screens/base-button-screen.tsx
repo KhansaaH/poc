@@ -9,8 +9,9 @@ import {
 import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { MyCustomIconsPack, AppIcon } from '../../icons/base-icon';
-import { BaseButton } from './base-button';
+import { BaseButton } from '../components/base-button/base-button';
+import { MyCustomIconsPack, AppIcon } from '../icons/base-icon';
+
 
 
 export default function App() {
