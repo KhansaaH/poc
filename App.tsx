@@ -27,10 +27,15 @@ export default function App() {
       <IconRegistry icons={[EvaIconsPack, MyCustomIconsPack]} />
       <ApplicationProvider {...eva} theme={eva.light}>
         <ScrollView contentContainerStyle={{ gap: 24, padding: 16 }}>
-          <BaseInput placeholder="Default input" size="medium" />
+          <BaseInput
+            label="Label"
+            placeholder="Default input"
+            size="medium"
+            status="default"
+          />
 
           <BaseInput
-          label='Label'
+            label="Label"
             placeholder="Hover / Focused"
             size="large"
             status="hover"
@@ -40,34 +45,32 @@ export default function App() {
             placeholder="Error input"
             size="large"
             status="error"
-          label='Label'
+            label="Label"
           />
 
           <BaseInput
             placeholder="selected input"
             size="large"
             status="selected"
-                      label='Label'
-
+            label="Label"
           />
           <BaseInput
             placeholder="filled-in input"
             size="large"
             status="filled-in"
-                      label='Label'
-
+            label="Label"
           />
           <BaseInput
             placeholder="disabled input"
             size="large"
             status="disabled"
-          label='Label'
+            label="Label"
           />
           <BaseInput
             placeholder="success input"
             size="large"
             status="success"
-          label='Label'
+            label="Label"
           />
         </ScrollView>
       </ApplicationProvider>

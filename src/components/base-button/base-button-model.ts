@@ -1,4 +1,4 @@
-import { TouchableOpacityProps } from "react-native";
+import { ImageStyle, TextStyle, TouchableOpacityProps, ViewStyle } from "react-native";
 
 export type ButtonVariant =
   | 'primary'
@@ -23,4 +23,7 @@ export interface IBaseButton extends TouchableOpacityProps {
   children?: React.ReactNode;
   buttonColor?: string;
   textColor?: string;
+  style?: ViewStyle | ViewStyle[];       
+  textStyle?: TextStyle | TextStyle[];  
+  iconStyle?: ImageStyle | ImageStyle[];
 }

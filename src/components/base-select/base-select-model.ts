@@ -4,7 +4,12 @@ import {
   SelectItemProps,
   SelectProps,
 } from '@ui-kitten/components';
-import { TextStyle, TouchableOpacityProps } from 'react-native';
+import {
+  ImageStyle,
+  TextStyle,
+  TouchableOpacityProps,
+  ViewStyle,
+} from 'react-native';
 
 export type SelectSize = 'small' | 'medium' | 'large';
 export type SelectVariant = 'default' | 'filter';
@@ -26,7 +31,9 @@ export interface IBaseSelect
   arrowIconProps?: Record<string, any>;
   size?: SelectSize;
   variant?: SelectVariant;
-  textStyle?: TextStyle;
+  style?: ViewStyle | ViewStyle[];
+  textStyle?: TextStyle | TextStyle[];
+  iconStyle?: ImageStyle | ImageStyle[];
   value?: string | number | Array<string | number>;
   onChange?: (value: string | number | Array<string | number>) => void;
 }

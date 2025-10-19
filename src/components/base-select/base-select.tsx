@@ -23,7 +23,7 @@ export const BaseSelect = ({
   value,
   style,
   textStyle,
-
+  iconStyle,
   ...touchableProps
 }: IBaseSelect) => {
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | undefined>();
@@ -44,6 +44,7 @@ export const BaseSelect = ({
       name={opened ? 'arrow-up' : 'arrow-down'}
       width={20}
       height={20}
+      style={iconStyle}
     />
   );
 
@@ -56,7 +57,7 @@ export const BaseSelect = ({
 
   return (
     <View style={[styles.container, style]}>
-      {label && <Text style={styles.label}>{label}</Text>}
+      {label && <Text style={[styles.label, textStyle]}>{label}</Text>}
 
       <View style={[opened && styles.selectWrapperFocused]}>
         <Select
@@ -70,7 +71,7 @@ export const BaseSelect = ({
           accessoryRight={renderArrow}
           onFocus={() => setOpened(true)}
           onBlur={() => setOpened(false)}
-          style={styles.select}
+          style={[styles.select, style]}
         >
           {data.map((item, i) => (
             <SelectItem

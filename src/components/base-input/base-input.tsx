@@ -1,26 +1,8 @@
 import React, { useState } from 'react';
 import { Input } from '@ui-kitten/components';
-import {
-  View,
-  StyleSheet,
-  ViewStyle,
-  TextStyle,
-  ImageProps,
-  Text,
-} from 'react-native';
+import { View, ImageProps, Text } from 'react-native';
 import { IBaseInput } from './base-input-model';
-
-const COLORS = {
-  textDefault: '#455664',
-  textError: '#EA0000',
-  borderHover: '#BACCF5',
-  borderTransparent: 'transparent',
-  bgDefault: '#F5F7F9',
-  borderSelected: '#205CDF',
-  bgFilledIn: '#FFFFFF',
-  textDisabled: '#A1A1A1',
-  success: '#009639',
-};
+import { sizeStyles, STATUS_STYLES, styles } from './base-input-style';
 
 export const BaseInput: React.FC<IBaseInput> = ({
   id,
@@ -38,38 +20,21 @@ export const BaseInput: React.FC<IBaseInput> = ({
   const { wrapper, inputPadding } = sizeStyles[size];
   const [isFocused, setIsFocused] = useState(false);
 
-  // 🔹 Detect "error" state
+  /** 🔹 Detect “error” state */
   const isError = status === 'error' || !!caption;
 
-  /** 🎨 Compute visual style */
-  const getDynamicStyle = () => {
-    let borderColor = COLORS.borderTransparent;
-    let backgroundColor = COLORS.bgDefault;
-    let color = COLORS.textDefault;
+  /** 🔹 Choose base style from map */
+  let dynamicStyle = STATUS_STYLES[status] ?? STATUS_STYLES.default;
 
-    if (isError) {
-      borderColor = COLORS.textError;
-      color = COLORS.textError;
-    } else if (isFocused || status === 'hover') {
-      borderColor = COLORS.borderHover;
-    } else if (status === 'selected') {
-      borderColor = COLORS.borderSelected;
-    } else if (status === 'filled-in') {
-      backgroundColor = COLORS.bgFilledIn;
-    } else if (status === 'disabled') {
-      borderColor = COLORS.borderTransparent;
-      backgroundColor = COLORS.bgDefault;
-      color = COLORS.textDisabled;
-    } else if (status === 'success') {
-      borderColor = COLORS.success;
-      backgroundColor = COLORS.bgDefault;
-      color = COLORS.success;
-    }
+  /** 🔹 Override when focused */
+  if (isFocused && !isError && status !== 'disabled') {
+    dynamicStyle = STATUS_STYLES.hover;
+  }
 
-    return { borderColor, backgroundColor, color };
-  };
-
-  const dynamicStyle = getDynamicStyle();
+  /** 🔹 Override if error present */
+  if (isError) {
+    dynamicStyle = STATUS_STYLES.error;
+  }
 
   /** 🔹 Icon Rendering Helper */
   const renderAccessory = (
@@ -92,7 +57,9 @@ export const BaseInput: React.FC<IBaseInput> = ({
   return (
     <View style={[styles.wrapper, wrapper]}>
       {label && (
-        <Text style={[styles.label, { color: dynamicStyle.color }]}>
+        <Text
+          style={[styles.label, { color: dynamicStyle.textColor }, textStyle]}
+        >
           {label}
         </Text>
       )}
@@ -100,7 +67,7 @@ export const BaseInput: React.FC<IBaseInput> = ({
         id={id}
         {...props}
         placeholder={placeholder}
-        placeholderTextColor={dynamicStyle.color}
+        placeholderTextColor={dynamicStyle.textColor}
         style={[
           styles.input,
           inputPadding,
@@ -110,7 +77,7 @@ export const BaseInput: React.FC<IBaseInput> = ({
           },
           style,
         ]}
-        textStyle={[styles.text, textStyle, { color: dynamicStyle.color }]}
+        textStyle={[styles.text, textStyle, { color: dynamicStyle.textColor }]}
         accessoryLeft={renderAccessory(accessoryLeft, 'left')}
         accessoryRight={renderAccessory(accessoryRight, 'right')}
         caption={caption}
@@ -123,39 +90,3 @@ export const BaseInput: React.FC<IBaseInput> = ({
 };
 
 export default BaseInput;
-
-/* ==================== Styles ==================== */
-const styles = StyleSheet.create({
-  wrapper: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-  } as ViewStyle,
-  label: {
-    fontSize: 14,
-    fontWeight: '500',
-    marginBottom: 6,
-  } as TextStyle,
-  input: {
-    flex: 1,
-    borderWidth: 1,
-    borderRadius: 8,
-  } as ViewStyle,
-  text: {
-    fontSize: 16,
-  } as TextStyle,
-});
-
-export const sizeStyles = {
-  small: {
-    wrapper: { padding: 14, gap: 14 },
-    inputPadding: { paddingVertical: 14, paddingHorizontal: 18 },
-  },
-  medium: {
-    wrapper: { padding: 10, gap: 10 },
-    inputPadding: { paddingVertical: 10, paddingHorizontal: 14 },
-  },
-  large: {
-    wrapper: { padding: 6, gap: 6 },
-    inputPadding: { paddingVertical: 6, paddingHorizontal: 10 },
-  },
-};
