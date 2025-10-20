@@ -18,6 +18,7 @@ export type CardBackgroundTypes =
   | 'light-grey'
   | 'opacity-white-60';
 
+
 export interface IBaseCard {
   elevation?: CardElevationTypes;
   background?: CardBackgroundTypes;
@@ -27,4 +28,10 @@ export interface IBaseCard {
   header?: ReactNode;
   footer?: ReactNode;
   fullWidth?: boolean;
+
+  image?: string;
+ 
+  imageHeight?: number;
+
+  overlayColor?: string;
 }

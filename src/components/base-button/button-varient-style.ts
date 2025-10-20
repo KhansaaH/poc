@@ -1,6 +1,4 @@
-/** ================================================================
- * 🔹 Color Maps (all button variants centralized here)
- * ================================================================ */
+
 export const backgroundMap = {
   primary: { normal: '#205CDF', active: '#113278', disabled: '#A6BEF2' },
   secondary: { normal: '#E1E8FF', active: '#205CDF', disabled: '#F2F8FF' },
@@ -18,5 +16,3 @@ export const textColorMap = {
   tertiary: { normal: '#205CDF', active: '#205CDF', disabled: '#A1BBF2' },
   default: { normal: '#171717', active: '#171717', disabled: '#999' },
 } as const;
-
-/** ================================================================ */
