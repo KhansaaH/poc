@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  ApplicationProvider,
-  IconRegistry,
-  Text,
-} from '@ui-kitten/components';
+import { ApplicationProvider, IconRegistry, Text } from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { NavigationContainer } from '@react-navigation/native';
