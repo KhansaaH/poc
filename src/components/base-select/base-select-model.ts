@@ -1,11 +1,4 @@
-import React from 'react';
-import { SelectProps } from '@ui-kitten/components';
-import {
-  ImageStyle,
-  TextStyle,
-  TouchableOpacityProps,
-  ViewStyle,
-} from 'react-native';
+import { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
 export type SelectSize = 'small' | 'medium' | 'large';
 export type SelectVariant = 'default' | 'filter';
@@ -16,10 +9,7 @@ export interface IBaseSelectItem {
   icon?: React.ReactNode;
 }
 
-// To do when final build is ready check the omitted props
-export interface IBaseSelect
-  extends Omit<SelectProps, 'onSelect' | 'selectedIndex'>,
-    Omit<TouchableOpacityProps, 'children'> {
+export interface IBaseSelect {
   label?: string;
   data: IBaseSelectItem[] | string[];
   loading?: boolean;
@@ -30,6 +20,8 @@ export interface IBaseSelect
   style?: ViewStyle | ViewStyle[];
   textStyle?: TextStyle | TextStyle[];
   iconStyle?: ImageStyle | ImageStyle[];
+  placeholder?: string;
+  disabled?: boolean;
   value?: string | number | Array<string | number>;
   onChange?: (value: string | number | Array<string | number>) => void;
 }

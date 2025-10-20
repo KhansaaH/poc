@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import {
-  Select,
-  SelectItem,
-  IndexPath,
+  View,
   Text,
-} from '@ui-kitten/components';
-import { View } from 'react-native';
-import { IBaseSelect } from './base-select-model';
-import { styles } from './base-select-style';
+  Pressable,
+  Modal,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import { AppIcon } from '../../icons/base-icon';
+import { IBaseSelect, IBaseSelectItem } from './base-select-model';
+import { styles } from './base-select-style';
 
-export const BaseSelect = ({
+export const BaseSelect: React.FC<IBaseSelect> = ({
   label,
   data,
   placeholder = 'Select...',
@@ -21,62 +22,96 @@ export const BaseSelect = ({
   style,
   textStyle,
   iconStyle,
-  ...touchableProps
-}: IBaseSelect) => {
-  const [selectedIndex, setSelectedIndex] = useState<IndexPath | undefined>();
+}) => {
   const [opened, setOpened] = useState(false);
+  const [selectedValue, setSelectedValue] = useState<string | number | null>(null);
 
-  const handleSelect = (index: IndexPath | IndexPath[]) => {
-    if (Array.isArray(index)) return;
-    setSelectedIndex(index);
-    const item = data[index.row];
-    const selectedValue = typeof item === 'string' ? item : item.value;
-    onChange?.(selectedValue);
+  /** 🔹 Normalize item */
+  const getItemLabel = (item: string | IBaseSelectItem) =>
+    typeof item === 'string' ? item : item.label;
+  const getItemValue = (item: string | IBaseSelectItem) =>
+    typeof item === 'string' ? item : item.value;
+
+  /** 🔹 Handle selection */
+  const handleSelect = (item: string | IBaseSelectItem) => {
+    const value = getItemValue(item);
+    setSelectedValue(value);
+    onChange?.(value);
+    setOpened(false);
   };
 
-  const renderArrow = (propsIcon: any) => (
-    <AppIcon
-      {...propsIcon}
-      {...arrowIconProps}
-      name={opened ? 'ArrowUp' : 'ArrowDown'}
-      width={20}
-      height={20}
-      fill={disabled ? '#A1A1A1' : opened ? '#205CDF' : '#455664'}
-      style={[{ marginRight: 6 }, iconStyle]}
-    />
-  );
+  /** 🔹 Arrow color logic */
+  const arrowColor = disabled ? '#A1A1A1' : opened ? '#205CDF' : '#455664';
 
-  const selectedValue =
-    selectedIndex !== undefined
-      ? typeof data[selectedIndex.row] === 'string'
-        ? data[selectedIndex.row]
-        : (data[selectedIndex.row] as any).label
+  const displayLabel =
+    selectedValue != null
+      ? getItemLabel(data.find((d) => getItemValue(d) === selectedValue) ?? '')
       : placeholder;
+const normalizedData: IBaseSelectItem[] = data.map((item) =>
+  typeof item === 'string' ? { label: item, value: item } : item,
+);
 
   return (
-    <View>
+    <View style={{ width: '100%' }}>
       {label && <Text style={[styles.label, textStyle]}>{label}</Text>}
 
-      <Select
-        {...touchableProps}
-        placeholder={placeholder}
-        disabled={disabled}
-        selectedIndex={selectedIndex}
-        onSelect={handleSelect}
-        value={selectedValue}
-        accessoryRight={renderArrow}
-        onFocus={() => setOpened(true)}
-        onBlur={() => setOpened(false)}
-        style={[styles.select, opened && styles.selectFocused, style]}
+      {/* Main button */}
+      <Pressable
+        onPress={() => !disabled && setOpened(true)}
+        style={[
+          styles.select,
+          opened && styles.selectFocused,
+          disabled && { opacity: 0.6 },
+          style,
+        ]}
       >
-        {data.map((item, i) => (
-          <SelectItem
-            key={i}
-            style={withDivider ? styles.divider : {}}
-            title={typeof item === 'string' ? item : item.label}
-          />
-        ))}
-      </Select>
+        <Text
+          style={[
+            styles.text,
+            textStyle,
+            { flex: 1, color: disabled ? '#A1A1A1' : '#455664' },
+          ]}
+          numberOfLines={1}
+        >
+          {displayLabel}
+        </Text>
+
+        <AppIcon
+          {...arrowIconProps}
+          name={opened ? 'ArrowUp' : 'ArrowDown'}
+          width={20}
+          height={20}
+          fill={arrowColor}
+          style={[{ marginRight: 6 }, iconStyle]}
+        />
+      </Pressable>
+
+      {/* Modal Dropdown */}
+      <Modal visible={opened} transparent animationType="fade">
+        <TouchableOpacity
+          style={styles.modalBackdrop}
+          activeOpacity={1}
+          onPressOut={() => setOpened(false)}
+        >
+          <View style={styles.modalContainer}>
+            <FlatList
+              data={normalizedData}
+              keyExtractor={(_, index) => index.toString()}
+              renderItem={({ item, index }) => (
+                <TouchableOpacity
+                  style={[
+                    styles.optionItem,
+                    withDivider && index < data.length - 1 && styles.divider,
+                  ]}
+                  onPress={() => handleSelect(item)}
+                >
+                  <Text style={styles.optionText}>{getItemLabel(item)}</Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };

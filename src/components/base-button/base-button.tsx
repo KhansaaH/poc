@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import {
   ActivityIndicator,
-  ImageProps,
-  StyleSheet,
-  TextStyle,
-  ViewStyle,
+  Text,
+  View,
+  TouchableWithoutFeedback,
 } from 'react-native';
-import { Button, Text } from '@ui-kitten/components';
-import { sizeStyles, styles } from './base-button-styles';
 import { IBaseButton } from './base-button-model';
+import { styles, sizeStyles } from './base-button-styles';
 import { backgroundMap, textColorMap } from './button-varient-style';
 
 export const BaseButton: React.FC<IBaseButton> = ({
@@ -19,7 +17,7 @@ export const BaseButton: React.FC<IBaseButton> = ({
   disabled = false,
   selected = false,
   loading = false,
-  icon,
+  icon,  
   iconPlacement = 'before',
   children,
   buttonColor,
@@ -31,85 +29,64 @@ export const BaseButton: React.FC<IBaseButton> = ({
 }) => {
   const [pressed, setPressed] = useState(false);
 
-  /** 🔹 Compute background color */
-  const getBackgroundColor = (): string => {
-    if (buttonColor) return buttonColor;
-    const state = disabled
-      ? 'disabled'
-      : selected || pressed
-      ? 'active'
-      : 'normal';
-    return backgroundMap[variant]?.[state] ?? '#F2F2F2';
-  };
+  const state = disabled ? 'disabled' : selected || pressed ? 'active' : 'normal';
 
-  /** 🔹 Compute text color */
-  const getTextColor = (): string => {
-    if (textColor) return textColor;
-    const state = disabled
-      ? 'disabled'
-      : selected || pressed
-      ? 'active'
-      : 'normal';
-    return textColorMap[variant]?.[state] ?? '#FFF';
-  };
-
-  const backgroundColor = getBackgroundColor();
-  const textColorFinal = getTextColor();
+  const backgroundColor = buttonColor ?? backgroundMap[variant][state];
+  const textColorFinal = textColor ?? textColorMap[variant][state];
   const sizeStyle = sizeStyles[size];
 
-  /** 🔹 Clone icon safely */
-  const renderIcon = (
-    iconElement?: React.ReactElement<any>,
-  ): React.ReactElement | undefined => {
-    if (!iconElement) return undefined;
-    return React.cloneElement(iconElement as React.ReactElement<any>, {
+  const renderIcon = () => {
+    if (loading) return <ActivityIndicator color={textColorFinal} />;
+    if (!icon) return null;
+
+    const el = icon as React.ReactElement<any>;
+    return React.cloneElement(el, {
+      style: [styles.icon, iconStyle, el.props?.style],
+      color: textColorFinal,
       fill: textColorFinal,
-      style: [styles.icon, iconStyle, iconElement.props?.style],
     });
   };
 
-  /** 🔹 Icon logic */
-  const accessoryLeft = loading
-    ? (props?: Partial<ImageProps>) => (
-        <ActivityIndicator color={textColorFinal} />
-      )
-    : icon && iconPlacement === 'before'
-    ? (props?: Partial<ImageProps>) => <>{renderIcon(icon)}</>
-    : undefined;
-
-  const accessoryRight =
-    icon && iconPlacement === 'after'
-      ? (props?: Partial<ImageProps>) => <>{renderIcon(icon)}</>
-      : undefined;
-
-  const containerStyle = [
-    styles.base,
-    sizeStyle,
-    fullWidth && styles.fullWidth,
-    { backgroundColor, borderColor: backgroundColor, borderWidth: 1 },
-  ];
+  const content = (
+    <View style={styles.row}>
+      {icon && iconPlacement === 'before' && renderIcon()}
+      <Text
+        style={[
+          styles.text,
+          { color: textColorFinal, fontSize: sizeStyle.textSize },
+          textStyle,
+        ]}
+        numberOfLines={1}
+      >
+        {children}
+      </Text>
+      {icon && iconPlacement === 'after' && renderIcon()}
+    </View>
+  );
 
   return (
-    <Button
+    <TouchableWithoutFeedback
       {...touchableProps}
       onPress={onPress}
-      disabled={disabled || loading}
       onPressIn={() => setPressed(true)}
       onPressOut={() => setPressed(false)}
-      style={[containerStyle, style]}
-      accessoryLeft={accessoryLeft}
-      accessoryRight={accessoryRight}
+      disabled={disabled || loading}
     >
-      {(evaProps: any) => (
-        <Text
-          {...evaProps}
-          style={[styles.text, { color: textColorFinal }, textStyle]}
-          numberOfLines={1}
-          adjustsFontSizeToFit
-        >
-          {children}
-        </Text>
-      )}
-    </Button>
+      <View
+        style={[
+          styles.base,
+          {
+            backgroundColor,
+            borderColor: backgroundColor,
+            paddingVertical: sizeStyle.paddingVertical,
+            paddingHorizontal: sizeStyle.paddingHorizontal,
+          },
+          fullWidth && styles.fullWidth,
+          style,
+        ]}
+      >
+        {content}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };

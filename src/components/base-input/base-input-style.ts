@@ -1,40 +1,48 @@
-import { StyleSheet, ViewStyle, TextStyle } from "react-native";
+import { StyleSheet } from 'react-native';
 
 /* ==================== Styles ==================== */
 export const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'column',
     alignItems: 'flex-start',
-  } as ViewStyle,
+    width: '100%',
+  },
   label: {
     fontSize: 14,
     fontWeight: '500',
-  } as TextStyle,
-  input: {
-    flex: 1,
+    marginBottom: 4,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
     borderRadius: 8,
-  } as ViewStyle,
+    width: '100%',
+  },
   text: {
     fontSize: 16,
-  } as TextStyle,
+    paddingVertical: 0,
+  },
+  caption: {
+    fontSize: 12,
+  },
 });
 
+/* ==================== Size Styles ==================== */
 export const sizeStyles = {
   small: {
-    wrapper: { padding: 14, gap: 14 },
-    inputPadding: { paddingVertical: 14, paddingHorizontal: 18 },
+    wrapper: { padding: 6, gap: 6 },
+    inputPadding: { paddingVertical: 8, paddingHorizontal: 10 },
   },
   medium: {
-    wrapper: { padding: 10, gap: 10 },
+    wrapper: { padding: 8, gap: 8 },
     inputPadding: { paddingVertical: 10, paddingHorizontal: 14 },
   },
   large: {
-    wrapper: { padding: 6, gap: 6 },
-    inputPadding: { paddingVertical: 6, paddingHorizontal: 10 },
+    wrapper: { padding: 10, gap: 10 },
+    inputPadding: { paddingVertical: 12, paddingHorizontal: 16 },
   },
 };
-
 
 /* 🎨 Design Tokens */
 const COLORS = {

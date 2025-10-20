@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text, Card } from '@ui-kitten/components';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View, Text } from 'react-native';
 import { BaseButton } from '../components/base-button/base-button';
 import { AppIcon } from '../icons/base-icon';
 
@@ -13,14 +12,7 @@ export default function ButtonPage() {
           <BaseButton variant="primary">Label</BaseButton>
           <BaseButton
             variant="primary"
-            icon={
-              <AppIcon
-                pack="custom"
-                name="ApproveFill"
-                fill={'white'}
-                style={{ marginRight: 6 }}
-              />
-            }
+            icon={<AppIcon name="ArrowAlt" fill="red" />}
           >
             With Icon
           </BaseButton>
@@ -53,35 +45,38 @@ export default function ButtonPage() {
       <ButtonSection title="System Buttons">
         <ButtonGroup label="Approve / Reject">
           <BaseButton variant="system-approve">Approve</BaseButton>
+
           <BaseButton
             variant="system-approve"
             icon={
               <AppIcon
-                pack="custom"
-                name="Approve"
-                fill={'#006B29'}
+                name="ApproveFill"
+                fill="#006B29"
+                color="#205CDF"
                 style={{ marginRight: 6 }}
               />
             }
           >
             Approve
           </BaseButton>
+
           <BaseButton variant="system-approve" selected>
             Selected
           </BaseButton>
+
           <BaseButton variant="system-reject">Reject</BaseButton>
 
           <BaseButton
             variant="system-reject"
-            icon={
-              <AppIcon pack="custom" name="Delete" style={{ marginRight: 6 }} />
-            }
+            icon={<AppIcon name="Delete" style={{ marginRight: 6 }} />}
           >
             Reject
           </BaseButton>
+
           <BaseButton variant="system-reject" selected>
             Selected
           </BaseButton>
+
           <BaseButton variant="system-reject" disabled>
             Disabled
           </BaseButton>
@@ -94,17 +89,10 @@ export default function ButtonPage() {
           <BaseButton variant="tertiary">Label</BaseButton>
           <BaseButton
             variant="tertiary"
-            icon={
-              <AppIcon
-                pack="custom"
-                name="ArrowDown"
-                style={{ marginRight: 6 }}
-              />
-            }
+            icon={<AppIcon name="ArrowDown" style={{ marginRight: 6 }} />}
           >
             Label
           </BaseButton>
-
           <BaseButton variant="default">Default</BaseButton>
         </ButtonGroup>
       </ButtonSection>
@@ -112,7 +100,7 @@ export default function ButtonPage() {
   );
 }
 
-/* =============== PRESENTATION HELPERS =============== */
+/* =================== PRESENTATION HELPERS =================== */
 
 const ButtonSection = ({
   title,
@@ -121,10 +109,10 @@ const ButtonSection = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <Card style={styles.card}>
+  <View style={styles.card}>
     <Text style={styles.cardTitle}>{title}</Text>
     {children}
-  </Card>
+  </View>
 );
 
 const ButtonGroup = ({
@@ -140,7 +128,7 @@ const ButtonGroup = ({
   </View>
 );
 
-/* =============== STYLES =============== */
+/* =================== STYLES =================== */
 
 const styles = StyleSheet.create({
   container: {
@@ -153,7 +141,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     borderRadius: 16,
     padding: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#FFFFFF',
     shadowColor: '#000',
     shadowOpacity: 0.05,
     shadowRadius: 10,

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { Input } from '@ui-kitten/components';
-import { View, ImageProps, Text } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  ImageProps,
+} from 'react-native';
 import { IBaseInput } from './base-input-model';
-import { sizeStyles, STATUS_STYLES, styles } from './base-input-style';
+import { styles, sizeStyles, STATUS_STYLES } from './base-input-style';
 
 export const BaseInput: React.FC<IBaseInput> = ({
   id,
@@ -15,41 +19,50 @@ export const BaseInput: React.FC<IBaseInput> = ({
   status = 'default',
   caption,
   placeholder,
+  editable = true,
+  value,
+  onChangeText,
   ...props
 }) => {
   const { wrapper, inputPadding } = sizeStyles[size];
   const [isFocused, setIsFocused] = useState(false);
 
-  /** 🔹 Detect “error” state */
+  /** 🔹 Determine state */
   const isError = status === 'error' || !!caption;
+  const isDisabled = status === 'disabled' || !editable;
 
-  /** 🔹 Choose base style from map */
   let dynamicStyle = STATUS_STYLES[status] ?? STATUS_STYLES.default;
 
-  /** 🔹 Override when focused */
-  if (isFocused && !isError && status !== 'disabled') {
+  if (isFocused && !isError && !isDisabled) {
     dynamicStyle = STATUS_STYLES.hover;
   }
 
-  /** 🔹 Override if error present */
   if (isError) {
     dynamicStyle = STATUS_STYLES.error;
   }
 
-  /** 🔹 Icon Rendering Helper */
+  /** 🔹 Render accessory icons */
   const renderAccessory = (
     Accessory: IBaseInput['accessoryLeft'] | IBaseInput['accessoryRight'],
     position: 'left' | 'right',
   ) => {
-    if (!Accessory) return undefined;
-    return (evaProps?: Partial<ImageProps>) => (
+    if (!Accessory) return null;
+
+    const el =
+      typeof Accessory === 'function' ? (
+        Accessory({} as Partial<ImageProps>)
+      ) : (
+        Accessory
+      );
+
+    return (
       <View
         style={{
           marginRight: position === 'left' ? wrapper.gap : 0,
           marginLeft: position === 'right' ? wrapper.gap : 0,
         }}
       >
-        {typeof Accessory === 'function' ? Accessory(evaProps) : Accessory}
+        {el}
       </View>
     );
   };
@@ -63,28 +76,51 @@ export const BaseInput: React.FC<IBaseInput> = ({
           {label}
         </Text>
       )}
-      <Input
-        id={id}
-        {...props}
-        placeholder={placeholder}
-        placeholderTextColor={dynamicStyle.textColor}
+
+      <View
         style={[
-          styles.input,
+          styles.inputContainer,
           inputPadding,
           {
             borderColor: dynamicStyle.borderColor,
             backgroundColor: dynamicStyle.backgroundColor,
+            opacity: isDisabled ? 0.6 : 1,
           },
           style,
         ]}
-        textStyle={[styles.text, textStyle, { color: dynamicStyle.textColor }]}
-        accessoryLeft={renderAccessory(accessoryLeft, 'left')}
-        accessoryRight={renderAccessory(accessoryRight, 'right')}
-        caption={caption}
-        status={isError ? 'danger' : 'basic'}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-      />
+      >
+        {renderAccessory(accessoryLeft, 'left')}
+
+        <TextInput
+          id={id}
+          value={value}
+          placeholder={placeholder}
+          placeholderTextColor={dynamicStyle.textColor}
+          editable={!isDisabled}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          onChangeText={onChangeText}
+          style={[
+            styles.text,
+            { color: dynamicStyle.textColor, flex: 1 },
+            textStyle,
+          ]}
+          {...props}
+        />
+
+        {renderAccessory(accessoryRight, 'right')}
+      </View>
+
+      {isError && caption && (
+        <Text
+          style={[
+            styles.caption,
+            { color: STATUS_STYLES.error.textColor, marginTop: 4 },
+          ]}
+        >
+          {caption}
+        </Text>
+      )}
     </View>
   );
 };
