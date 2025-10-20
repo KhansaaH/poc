@@ -1,123 +1,114 @@
 import React from 'react';
-import {
-  ApplicationProvider,
-  IconRegistry,
-  Layout,
-  Text,
-  Card,
-} from '@ui-kitten/components';
-import * as eva from '@eva-design/eva';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { Text, Card } from '@ui-kitten/components';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { BaseButton } from '../components/base-button/base-button';
-import { MyCustomIconsPack, AppIcon } from '../icons/base-icon';
+import { AppIcon } from '../icons/base-icon';
 
-
-
-export default function App() {
+export default function ButtonPage() {
   return (
-    <>
-      <IconRegistry icons={[EvaIconsPack, MyCustomIconsPack]} />
-      <ApplicationProvider {...eva} theme={eva.light}>
-        <ScrollView contentContainerStyle={styles.container}>
-          {/* 🔹 PRIMARY BUTTONS */}
-          <ButtonSection title="Primary Buttons">
-            <ButtonGroup label="Default State">
-              <BaseButton variant="primary">Label</BaseButton>
-              <BaseButton
-                variant="primary"
-                icon={
-                  <AppIcon
-                    pack="custom"
-                    name="ApproveFill"
-                    fill={'white'}
-                    style={{ marginRight: 6 }}
-                  />
-                }
-              >
-                With Icon
-              </BaseButton>
-            </ButtonGroup>
+    <ScrollView contentContainerStyle={styles.container}>
+      {/* 🔹 PRIMARY BUTTONS */}
+      <ButtonSection title="Primary Buttons">
+        <ButtonGroup label="Default State">
+          <BaseButton variant="primary">Label</BaseButton>
+          <BaseButton
+            variant="primary"
+            icon={
+              <AppIcon
+                pack="custom"
+                name="ApproveFill"
+                fill={'white'}
+                style={{ marginRight: 6 }}
+              />
+            }
+          >
+            With Icon
+          </BaseButton>
+        </ButtonGroup>
 
-            <ButtonGroup label="Selected / Disabled">
-              <BaseButton variant="primary" selected>
-                Selected
-              </BaseButton>
-              <BaseButton variant="primary" disabled>
-                Disabled
-              </BaseButton>
-            </ButtonGroup>
-          </ButtonSection>
+        <ButtonGroup label="Selected / Disabled">
+          <BaseButton variant="primary" selected>
+            Selected
+          </BaseButton>
+          <BaseButton variant="primary" disabled>
+            Disabled
+          </BaseButton>
+        </ButtonGroup>
+      </ButtonSection>
 
-          {/* 🔹 SECONDARY BUTTONS */}
-          <ButtonSection title="Secondary Buttons">
-            <ButtonGroup label="Default">
-              <BaseButton variant="secondary">Default</BaseButton>
-              <BaseButton variant="secondary" selected>
-                Selected
-              </BaseButton>
-              <BaseButton variant="secondary" disabled>
-                Disabled
-              </BaseButton>
-            </ButtonGroup>
-          </ButtonSection>
+      {/* 🔹 SECONDARY BUTTONS */}
+      <ButtonSection title="Secondary Buttons">
+        <ButtonGroup label="Default">
+          <BaseButton variant="secondary">Default</BaseButton>
+          <BaseButton variant="secondary" selected>
+            Selected
+          </BaseButton>
+          <BaseButton variant="secondary" disabled>
+            Disabled
+          </BaseButton>
+        </ButtonGroup>
+      </ButtonSection>
 
-          {/* 🔹 SYSTEM BUTTONS */}
-          <ButtonSection title="System Buttons">
-            <ButtonGroup label="Approve / Reject">
-              <BaseButton variant="system-approve">Approve</BaseButton>
-              <BaseButton
-                variant="system-approve"
-                icon={
-                  <AppIcon
-                    pack="custom"
-                    name="Approve"
-                    fill={'#006B29'}
-                    style={{ marginRight: 6 }}
-                  />
-                }
-              >
-                Approve
-              </BaseButton>
-              <BaseButton variant="system-approve" selected>
-                Selected
-              </BaseButton>
-              <BaseButton variant="system-reject">Reject</BaseButton>
-         
-                <BaseButton variant="system-reject"  icon={
-                  <AppIcon
-                    pack="custom"
-                    name="Delete"
-                    style={{ marginRight: 6 }}
-                  />
-                }>Reject</BaseButton>
-              <BaseButton variant="system-reject" selected>
-                Selected
-              </BaseButton>
-              <BaseButton variant="system-reject" disabled>
-                Disabled
-              </BaseButton>
-            </ButtonGroup>
-          </ButtonSection>
+      {/* 🔹 SYSTEM BUTTONS */}
+      <ButtonSection title="System Buttons">
+        <ButtonGroup label="Approve / Reject">
+          <BaseButton variant="system-approve">Approve</BaseButton>
+          <BaseButton
+            variant="system-approve"
+            icon={
+              <AppIcon
+                pack="custom"
+                name="Approve"
+                fill={'#006B29'}
+                style={{ marginRight: 6 }}
+              />
+            }
+          >
+            Approve
+          </BaseButton>
+          <BaseButton variant="system-approve" selected>
+            Selected
+          </BaseButton>
+          <BaseButton variant="system-reject">Reject</BaseButton>
 
-          {/* 🔹 TERTIARY BUTTONS */}
-          <ButtonSection title="Tertiary Buttons">
-            <ButtonGroup>
-              <BaseButton variant="tertiary">Label</BaseButton>
-                 <BaseButton variant="tertiary"   icon={
-                                <AppIcon
-                                  pack="custom"
-                                  name="ArrowDown"
-                                  style={{ marginRight: 6 }}
-                                />
-                              }>Label</BaseButton>
-              
-              <BaseButton variant="default">Default</BaseButton>
-            </ButtonGroup>
-          </ButtonSection>
-        </ScrollView>
-      </ApplicationProvider>
-    </>
+          <BaseButton
+            variant="system-reject"
+            icon={
+              <AppIcon pack="custom" name="Delete" style={{ marginRight: 6 }} />
+            }
+          >
+            Reject
+          </BaseButton>
+          <BaseButton variant="system-reject" selected>
+            Selected
+          </BaseButton>
+          <BaseButton variant="system-reject" disabled>
+            Disabled
+          </BaseButton>
+        </ButtonGroup>
+      </ButtonSection>
+
+      {/* 🔹 TERTIARY BUTTONS */}
+      <ButtonSection title="Tertiary Buttons">
+        <ButtonGroup>
+          <BaseButton variant="tertiary">Label</BaseButton>
+          <BaseButton
+            variant="tertiary"
+            icon={
+              <AppIcon
+                pack="custom"
+                name="ArrowDown"
+                style={{ marginRight: 6 }}
+              />
+            }
+          >
+            Label
+          </BaseButton>
+
+          <BaseButton variant="default">Default</BaseButton>
+        </ButtonGroup>
+      </ButtonSection>
+    </ScrollView>
   );
 }
 

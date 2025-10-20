@@ -1,74 +1,58 @@
 import React from 'react';
-import {
-  ApplicationProvider,
-  IconRegistry,
-  InputProps,
-} from '@ui-kitten/components';
-import * as eva from '@eva-design/eva';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ScrollView } from 'react-native';
 import BaseInput from '../components/base-input/base-input';
-import { AppIcon, MyCustomIconsPack } from '../icons/base-icon';
+import { AppIcon } from '../icons/base-icon';
 
-const useInputState = (initialValue = ''): InputProps => {
-  const [value, setValue] = React.useState(initialValue);
-  return { value, onChangeText: setValue };
-};
-export default function App() {
+export default function InputPage() {
   return (
-    <>
-      <IconRegistry icons={[EvaIconsPack, MyCustomIconsPack]} />
-      <ApplicationProvider {...eva} theme={eva.light}>
-        <ScrollView contentContainerStyle={{ gap: 24, padding: 16 }}>
-          <BaseInput
-            label="Label"
-            placeholder="Default input"
-            size="medium"
-            status="default"
-            accessoryLeft={<AppIcon name="Search" />}
-          />
+    <ScrollView contentContainerStyle={{ gap: 24, padding: 16 }}>
+      <BaseInput
+        label="Label"
+        placeholder="Default input"
+        size="medium"
+        status="default"
+        accessoryLeft={<AppIcon name="Search" />}
+      />
 
-          <BaseInput
-            label="Label"
-            placeholder="Hover / Focused"
-            size="large"
-            status="hover"
-          />
+      <BaseInput
+        label="Label"
+        placeholder="Hover / Focused"
+        size="large"
+        status="hover"
+      />
 
-          <BaseInput
-            placeholder="Error input"
-            size="large"
-            status="error"
-            label="Label"
-            accessoryLeft={<AppIcon name="Search" />}
-          />
+      <BaseInput
+        placeholder="Error input"
+        size="large"
+        status="error"
+        label="Label"
+        accessoryLeft={<AppIcon name="Search" />}
+      />
 
-          <BaseInput
-            placeholder="selected input"
-            size="large"
-            status="selected"
-            label="Label"
-          />
-          <BaseInput
-            placeholder="filled-in input"
-            size="large"
-            status="filled-in"
-            label="Label"
-          />
-          <BaseInput
-            placeholder="disabled input"
-            size="large"
-            status="disabled"
-            label="Label"
-          />
-          <BaseInput
-            placeholder="success input"
-            size="large"
-            status="success"
-            label="Label"
-          />
-        </ScrollView>
-      </ApplicationProvider>
-    </>
+      <BaseInput
+        placeholder="selected input"
+        size="large"
+        status="selected"
+        label="Label"
+      />
+      <BaseInput
+        placeholder="filled-in input"
+        size="large"
+        status="filled-in"
+        label="Label"
+      />
+      <BaseInput
+        placeholder="disabled input"
+        size="large"
+        status="disabled"
+        label="Label"
+      />
+      <BaseInput
+        placeholder="success input"
+        size="large"
+        status="success"
+        label="Label"
+      />
+    </ScrollView>
   );
 }

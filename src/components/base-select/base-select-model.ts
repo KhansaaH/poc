@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  SelectGroupProps,
-  SelectItemProps,
-  SelectProps,
-} from '@ui-kitten/components';
+import { SelectProps } from '@ui-kitten/components';
 import {
   ImageStyle,
   TextStyle,

@@ -3,12 +3,12 @@ import {
   Select,
   SelectItem,
   IndexPath,
-  Icon,
   Text,
 } from '@ui-kitten/components';
 import { View } from 'react-native';
 import { IBaseSelect } from './base-select-model';
 import { styles } from './base-select-style';
+import { AppIcon } from '../../icons/base-icon';
 
 export const BaseSelect = ({
   label,
@@ -16,11 +16,8 @@ export const BaseSelect = ({
   placeholder = 'Select...',
   disabled = false,
   withDivider = true,
-  size = 'medium',
-  variant = 'default',
   arrowIconProps,
   onChange,
-  value,
   style,
   textStyle,
   iconStyle,
@@ -38,50 +35,48 @@ export const BaseSelect = ({
   };
 
   const renderArrow = (propsIcon: any) => (
-    <Icon
+    <AppIcon
       {...propsIcon}
       {...arrowIconProps}
-      name={opened ? 'arrow-up' : 'arrow-down'}
+      name={opened ? 'ArrowUp' : 'ArrowDown'}
       width={20}
       height={20}
-      style={iconStyle}
+      fill={disabled ? '#A1A1A1' : opened ? '#205CDF' : '#455664'}
+      style={[{ marginRight: 6 }, iconStyle]}
     />
   );
 
   const selectedValue =
     selectedIndex !== undefined
-      ? typeof data[(selectedIndex as IndexPath).row] === 'string'
-        ? data[(selectedIndex as IndexPath).row]
-        : (data[(selectedIndex as IndexPath).row] as any).label
+      ? typeof data[selectedIndex.row] === 'string'
+        ? data[selectedIndex.row]
+        : (data[selectedIndex.row] as any).label
       : placeholder;
 
   return (
-    <View style={[styles.container, style]}>
+    <View>
       {label && <Text style={[styles.label, textStyle]}>{label}</Text>}
 
-      <View style={[opened && styles.selectWrapperFocused]}>
-        <Select
-          {...touchableProps}
-          placeholder={placeholder}
-          disabled={disabled}
-          size={size}
-          selectedIndex={selectedIndex}
-          onSelect={handleSelect}
-          value={selectedValue}
-          accessoryRight={renderArrow}
-          onFocus={() => setOpened(true)}
-          onBlur={() => setOpened(false)}
-          style={[styles.select, style]}
-        >
-          {data.map((item, i) => (
-            <SelectItem
-              key={i}
-              style={withDivider ? styles.divider : {}}
-              title={typeof item === 'string' ? item : item.label}
-            />
-          ))}
-        </Select>
-      </View>
+      <Select
+        {...touchableProps}
+        placeholder={placeholder}
+        disabled={disabled}
+        selectedIndex={selectedIndex}
+        onSelect={handleSelect}
+        value={selectedValue}
+        accessoryRight={renderArrow}
+        onFocus={() => setOpened(true)}
+        onBlur={() => setOpened(false)}
+        style={[styles.select, opened && styles.selectFocused, style]}
+      >
+        {data.map((item, i) => (
+          <SelectItem
+            key={i}
+            style={withDivider ? styles.divider : {}}
+            title={typeof item === 'string' ? item : item.label}
+          />
+        ))}
+      </Select>
     </View>
   );
 };

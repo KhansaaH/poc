@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: '500',
-    // marginBottom: 6,
   } as TextStyle,
   input: {
     flex: 1,

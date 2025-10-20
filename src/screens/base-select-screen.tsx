@@ -10,6 +10,7 @@ export default function SelectPage() {
     >
       <Text style={styles.title}>Select Page</Text>
       <BaseSelect
+      // withDivider={false}
         label="Category"
         placeholder="Choose category"
         data={[
